@@ -24,6 +24,8 @@ export default function Container() {
 
     const [filterOptions, setFilterOptions] = useState([]);
 
+    const [sortOptions, setSortOptions] = useState([]);
+
     const link = 'Home > Discover > Games'
 
     const newCardProps = [
@@ -80,7 +82,6 @@ export default function Container() {
 
 
     function addFilterHandler(e){
-        
         filterOptions.push(e.target.value)
         let tempArr = cards.filter((e, i)=>{
             for (let index = 0; index < filterOptions.length; index++) {
@@ -93,10 +94,9 @@ export default function Container() {
         setCardsArray(tempArr)
     }
 
+    let tempArr = []
     function addSortHandler(e){
-        let tempArr =[]
         if(e.target.value === "Name"){
-            console.log('123')
             tempArr = cardsArray.sort(function (a, b) {
                 if (a.name > b.name) {
                   return 1;
@@ -115,8 +115,7 @@ export default function Container() {
                 return a.revievCount - b.revievCount
               });
         }
-        console.log(tempArr)
-        setCardsArray(tempArr)
+        setCardsArray([...tempArr])
     }
 
     function categoryRender(){
@@ -162,7 +161,7 @@ export default function Container() {
                     price={e.price}
                     description={e.description}
                     sale={e.sale}
-                    path={index < 13 ? `../img/Img-${index}.svg` : null}
+                    path={index < 13 ? `../img/Img-${e.imgName}.svg` : null}
                 />
             )
         })
@@ -211,7 +210,7 @@ export default function Container() {
             </div>
             <div className="">
                 <label className='search__label' htmlFor="search__sort">Sort by</label>
-                <select className='search__select' name="search__sort" id="search__sort" onChange={(e)=>addSortHandler()}>
+                <select className='search__select' name="search__sort" id="search__sort" onChange={addSortHandler}>
                 {sortRender()}
                 </select>
             </div>

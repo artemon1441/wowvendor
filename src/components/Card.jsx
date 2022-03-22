@@ -36,7 +36,6 @@ export default function Card({i, name, type, stars, revievCount, oldPrice, price
 
     function renderTitle(){
         if (type === "Action RPG") {
-            console.log(123)
             return(
                 <div className="title-item title-action--rpg">
                     <div className="circle"/> {type}
@@ -69,13 +68,13 @@ export default function Card({i, name, type, stars, revievCount, oldPrice, price
         } 
     }
 
-
+    console.log(path)
 
   return (
     <div className='card-item'>
         {path ? 
         <img className='card-img' src={path} alt="Card img" width={256} height={200} />
-        : <img className='card-img' src={`../img/Img-13.svg`} alt="New card Img" width={256} height={200} />
+        : <img className='card-img' src={require('../cardData/img/Img-13.svg').default} alt="New card Img" width={256} height={200} />
         }
         {/* <Title type={type} /> */}
             {renderTitle()}
